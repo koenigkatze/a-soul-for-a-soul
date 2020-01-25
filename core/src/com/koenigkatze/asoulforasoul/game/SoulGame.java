@@ -5,6 +5,7 @@ import com.koenigkatze.asoulforasoul.messages.codes.GameMessageCodes;
 import com.koenigkatze.asoulforasoul.messages.utils.MessageBuilder;
 
 import com.badlogic.gdx.Game;
+import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 
 public final class SoulGame extends Game
@@ -12,9 +13,8 @@ public final class SoulGame extends Game
 	@Override
 	public void create()
 	{
-//		BasicMessagingSetup.registerBasicEndpoints(this);
-//		MessageBuilder.forType(GameMessageCodes.LOAD_GAME.get()).dispatch();
-		new TmxMapLoader().load("maps/test.tmx");
+		BasicMessagingSetup.registerBasicEndpoints(this);
+		MessageBuilder.forType(GameMessageCodes.LOAD_GAME.get()).dispatch();
 	}
 
 	@Override

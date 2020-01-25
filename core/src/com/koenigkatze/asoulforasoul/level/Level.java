@@ -87,9 +87,9 @@ public final class Level
 		batch = new SpriteBatch();
 
 		mapLoader = new MapLoader();
-		final TiledMap tiledMap = mapLoader.loadFromStandardPath("island_3.tmx");
+		final TiledMap tiledMap = mapLoader.loadFromStandardPath("test.tmx");
 
-		final LevelData levelData = LevelData.builder("island_3", camera, inputController).withWorld(world)
+		final LevelData levelData = LevelData.builder("test", camera, inputController).withWorld(world)
 				.withEntityEngine(entityEngine).withBatch(batch).withTiledMap(tiledMap).build();
 
 		Messages.publish(LevelMessageCodes.LEVEL_DATA_LOADED, levelData);

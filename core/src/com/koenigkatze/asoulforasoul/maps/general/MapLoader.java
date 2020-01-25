@@ -43,9 +43,9 @@ public final class MapLoader
 		 characterMapper = new CharacterMapPropertiesMapper();
 	}
 
-	public TiledMap loadFromStandardPath(final String string)
+	public TiledMap loadFromStandardPath(final String name)
 	{
-		tiledMap = new TmxMapLoader().load(FileConstants.MAPS_STANDARD_PATH + "island_3.tmx");
+		tiledMap = new TmxMapLoader().load(FileConstants.MAPS_STANDARD_PATH + name);
 		mapAccess = new MapAccess(tiledMap);
 		mapPropertiesMapper = new CustomMapPropertiesMapper();
 
