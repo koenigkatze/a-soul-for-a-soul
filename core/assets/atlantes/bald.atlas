@@ -1,0 +1,89 @@
+
+bald.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+bald_down_stand
+  rotate: false
+  xy: 1, 191
+  size: 26, 36
+  orig: 26, 36
+  offset: 0, 0
+  index: -1
+bald_down_walk_1
+  rotate: false
+  xy: 1, 153
+  size: 26, 36
+  orig: 26, 36
+  offset: 0, 0
+  index: 1
+bald_down_walk_2
+  rotate: false
+  xy: 29, 191
+  size: 26, 36
+  orig: 26, 36
+  offset: 0, 0
+  index: 2
+bald_left_stand
+  rotate: false
+  xy: 1, 115
+  size: 26, 36
+  orig: 26, 36
+  offset: 0, 0
+  index: -1
+bald_left_walk_1
+  rotate: false
+  xy: 29, 153
+  size: 26, 36
+  orig: 26, 36
+  offset: 0, 0
+  index: 1
+bald_left_walk_2
+  rotate: false
+  xy: 1, 77
+  size: 26, 36
+  orig: 26, 36
+  offset: 0, 0
+  index: 2
+bald_right_stand
+  rotate: false
+  xy: 29, 115
+  size: 26, 36
+  orig: 26, 36
+  offset: 0, 0
+  index: -1
+bald_right_walk_1
+  rotate: false
+  xy: 1, 39
+  size: 26, 36
+  orig: 26, 36
+  offset: 0, 0
+  index: 1
+bald_right_walk_2
+  rotate: false
+  xy: 29, 77
+  size: 26, 36
+  orig: 26, 36
+  offset: 0, 0
+  index: 2
+bald_up_stand
+  rotate: false
+  xy: 1, 1
+  size: 26, 36
+  orig: 26, 36
+  offset: 0, 0
+  index: -1
+bald_up_walk_1
+  rotate: false
+  xy: 29, 39
+  size: 26, 36
+  orig: 26, 36
+  offset: 0, 0
+  index: 1
+bald_up_walk_2
+  rotate: false
+  xy: 29, 1
+  size: 26, 36
+  orig: 26, 36
+  offset: 0, 0
+  index: 2
