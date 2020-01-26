@@ -1,6 +1,6 @@
 package com.koenigkatze.asoulforasoul.maps.properties.general;
 
-public interface MapPropertyType
+public interface MapProperty
 {
 	public String getTag();
 }

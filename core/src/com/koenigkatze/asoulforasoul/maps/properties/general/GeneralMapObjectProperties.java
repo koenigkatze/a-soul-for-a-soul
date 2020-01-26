@@ -1,6 +1,8 @@
 package com.koenigkatze.asoulforasoul.maps.properties.general;
 
-public enum GeneralMapObjectProperties implements MapPropertyType
+import com.koenigkatze.asoulforasoul.maps.exceptions.UnknownMapPropertyValueException;
+
+public enum GeneralMapObjectProperties implements MapProperty
 {
 	NAME("name"), TYPE("type");
 
@@ -17,4 +19,13 @@ public enum GeneralMapObjectProperties implements MapPropertyType
 		return tag;
 	}
 
+	public static GeneralMapObjectProperties map(String value) throws UnknownMapPropertyValueException{
+		GeneralMapObjectProperties possibleValueOf = null;
+		try {
+			possibleValueOf = valueOf(value);
+		} catch (final IllegalArgumentException e) {
+			throw new UnknownMapPropertyValueException(e);
+		}
+		return possibleValueOf;
+	}
 }

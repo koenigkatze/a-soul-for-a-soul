@@ -1,16 +1,16 @@
 package com.koenigkatze.asoulforasoul.entities.messages;
 
+import com.badlogic.gdx.ai.msg.Telegram;
+import com.badlogic.gdx.maps.tiled.objects.TiledMapTileMapObject;
 import com.koenigkatze.asoulforasoul.level.LevelData;
 import com.koenigkatze.asoulforasoul.logging.Logging;
 import com.koenigkatze.asoulforasoul.maps.entities.MapEntityFactory;
+import com.koenigkatze.asoulforasoul.maps.general.BlockedObjectProperties;
 import com.koenigkatze.asoulforasoul.maps.properties.character.CharacterMapProperties;
 import com.koenigkatze.asoulforasoul.maps.properties.info.InfoObjectProperties;
 import com.koenigkatze.asoulforasoul.messages.codes.EntityMessageCodes;
 import com.koenigkatze.asoulforasoul.messages.codes.LevelMessageCodes;
 import com.koenigkatze.asoulforasoul.messages.routing.MessageRouterAdapter;
-
-import com.badlogic.gdx.ai.msg.Telegram;
-import com.badlogic.gdx.maps.tiled.objects.TiledMapTileMapObject;
 
 public final class EntityMessageRouter extends MessageRouterAdapter
 {
@@ -30,6 +30,16 @@ public final class EntityMessageRouter extends MessageRouterAdapter
 
 		switch (submittedMessageCode)
 		{
+		case CREATE_BLOCKED_OBJECT:
+			if (!(payload instanceof BlockedObjectProperties)) {
+				Logging.logError(EntityMessageRouter.class,
+						"Creating blocked object failed. Payload not instance of BlockedObjectProperties: " + payload);
+				return false;
+			}
+			final BlockedObjectProperties blockedObjectProperties = (BlockedObjectProperties) payload;
+			entityFactory.createBlockedObject(blockedObjectProperties);
+			Logging.logDebug(EntityMessageRouter.class, "Npc entity created: " + blockedObjectProperties);
+			break;
 		case CREATE_PLAYER_ENTITY:
 			if (!(payload instanceof CharacterMapProperties))
 			{
@@ -40,7 +50,7 @@ public final class EntityMessageRouter extends MessageRouterAdapter
 
 			final CharacterMapProperties playerProperties = (CharacterMapProperties) payload;
 			entityFactory.createPlayerEntity(playerProperties);
-			Logging.logDebug(EntityMessageRouter.class, "Npc entity created: " + playerProperties);
+			Logging.logDebug(EntityMessageRouter.class, "Player entity created: " + playerProperties);
 			return true;
 		case CREATE_NPC_ENTITY:
 			if (!(payload instanceof CharacterMapProperties))

@@ -1,15 +1,15 @@
-package com.koenigkatze.asoulforasoul.maps.properties.info;
+package com.koenigkatze.asoulforasoul.maps.general;
 
 import com.koenigkatze.asoulforasoul.maps.exceptions.UnknownMapPropertyValueException;
 import com.koenigkatze.asoulforasoul.maps.properties.general.MapProperty;
 
-public enum InfoObjectMapProperties implements MapProperty
+public enum MapTypes implements MapProperty
 {
-	INFOTEXT("infotext");
+	OUTSIDE("outside"), ;
 
 	private final String tag;
 
-	InfoObjectMapProperties(final String tag)
+	MapTypes(final String tag)
 	{
 		this.tag = tag;
 	}
@@ -20,10 +20,10 @@ public enum InfoObjectMapProperties implements MapProperty
 		return tag;
 	}
 	
-	public static InfoObjectMapProperties map(String value) throws UnknownMapPropertyValueException{
-		InfoObjectMapProperties possibleValueOf = null;
+	public static MapTypes map(final String value) throws UnknownMapPropertyValueException {
+		MapTypes possibleValueOf = null;
 		try {
-			possibleValueOf = valueOf(value);
+			possibleValueOf = valueOf(value.toUpperCase());
 		} catch (final IllegalArgumentException e) {
 			throw new UnknownMapPropertyValueException(e);
 		}

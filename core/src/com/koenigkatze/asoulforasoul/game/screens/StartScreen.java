@@ -29,8 +29,10 @@ public final class StartScreen extends ScreenAdapter
 		Gdx.graphics.setCursor(Cursors.STANDARD.get());
 		
 		Logging.logDebug(StartScreen.class, "Game loading completed. Changing to menu screen.");
-		MessageBuilder.forType(GameMessageCodes.CHANGE_SCREEN.get()).withExtraInfo(new ScreenMessageData(Screens.MENU))
-				.dispatch();
+//		MessageBuilder.forType(GameMessageCodes.CHANGE_SCREEN.get()).withExtraInfo(new ScreenMessageData(Screens.MENU))
+//				.dispatch();
+		MessageBuilder.forType(GameMessageCodes.CHANGE_SCREEN.get()).withExtraInfo(new ScreenMessageData(Screens.GAME))
+		.dispatch();
 	}
 
 	private void loadAssets()

@@ -1,55 +1,41 @@
 package com.koenigkatze.asoulforasoul.maps.properties.custom;
 
+import java.util.Arrays;
+import java.util.HashSet;
 import java.util.Set;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
-
-import com.koenigkatze.asoulforasoul.maps.MapEnvironmentTypes;
-import com.koenigkatze.asoulforasoul.maps.MapTerrainTypes;
-import com.koenigkatze.asoulforasoul.maps.exceptions.MapObjectMissingAttributeException;
-import com.koenigkatze.asoulforasoul.media.music.MusicRepositories;
-import com.koenigkatze.asoulforasoul.media.music.StandardMusicKeys;
 
 import com.badlogic.gdx.maps.MapProperties;
+import com.koenigkatze.asoulforasoul.maps.MapEnvironmentTypes;
+import com.koenigkatze.asoulforasoul.maps.MapTerrainTypes;
+import com.koenigkatze.asoulforasoul.maps.exceptions.MissingMapPropertyException;
 
-public final class CustomMapPropertiesMapper
-{
-	private final Set<CustomMapPropertyTypes> mandatoryProperties;
+public final class CustomMapPropertiesMapper {
+	private static final Set<CustomMapPropertyTypes> OUTSIDE_PROPERTIES = new HashSet<>(Arrays.asList(
+			CustomMapPropertyTypes.ENVIRONMENT, CustomMapPropertyTypes.TERRAINTYPE, CustomMapPropertyTypes.THEME));
 
-	public CustomMapPropertiesMapper()
-	{
-		super();
-		mandatoryProperties = Stream
-				.of(CustomMapPropertyTypes.ENVIRONMENT, CustomMapPropertyTypes.TERRAINTYPE, CustomMapPropertyTypes.THEME)
-				.collect(Collectors.toSet());
-	}
-	
-	public CustomMapProperties loadProperties(final MapProperties mapProperties)
-	{
-		testProperties(mapProperties);
+	public static CustomMapProperties loadOutsideProperties(String mapName, final MapProperties mapProperties) {
+		testProperties(mapName, mapProperties);
 		final CustomMapProperties customMapProperties = new CustomMapProperties();
-		
+
 		final String environmentValue = (String) mapProperties.get(CustomMapPropertyTypes.ENVIRONMENT.getTag());
-		customMapProperties.setEnvironment(MapEnvironmentTypes.valueOf(environmentValue.toUpperCase()));
+		customMapProperties.setEnvironment(MapEnvironmentTypes.map(environmentValue));
 
 		final String terrainTypeValue = (String) mapProperties.get(CustomMapPropertyTypes.TERRAINTYPE.getTag());
-		customMapProperties.setTerrainType(MapTerrainTypes.valueOf(terrainTypeValue.toUpperCase()));
+		customMapProperties.setTerrainType(MapTerrainTypes.map(terrainTypeValue));
 
 		final String themeValue = (String) mapProperties.get(CustomMapPropertyTypes.THEME.getTag());
-		if (!themeValue.equalsIgnoreCase("NONE")) {
-			customMapProperties.setTheme(MusicRepositories.getStandardRepository().get(StandardMusicKeys.valueOf(themeValue)));
-		}
-		
+		customMapProperties.setTheme(MapThemeTypes.map(themeValue));
+
 		return customMapProperties;
 	}
-	
-	private void testProperties(final MapProperties mapProperties)
-	{
-		for (final CustomMapPropertyTypes singleProperty : mandatoryProperties) {
+
+	private static void testProperties(final String mapName, final MapProperties mapProperties) {
+		for (final CustomMapPropertyTypes singleProperty : OUTSIDE_PROPERTIES) {
 			if (!mapProperties.containsKey(singleProperty.getTag()))
-				throw new MapObjectMissingAttributeException();
+				throw new MissingMapPropertyException(
+						"Map property missing: '" + singleProperty.getTag() + "' for map type 'outside' in map with name '" + mapName + "'. "
+								+ "This property is mandatory.");
 		}
 	}
-	
-	
+
 }

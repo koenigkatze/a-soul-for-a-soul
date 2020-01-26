@@ -3,13 +3,11 @@ package com.koenigkatze.asoulforasoul.maps.properties.custom;
 import com.koenigkatze.asoulforasoul.maps.MapEnvironmentTypes;
 import com.koenigkatze.asoulforasoul.maps.MapTerrainTypes;
 
-import com.badlogic.gdx.audio.Music;
-
 public final class CustomMapProperties
 {
 	private MapEnvironmentTypes environment;
 	private MapTerrainTypes terrainType;
-	private Music theme;
+	private MapThemeTypes theme;
 
 	public MapEnvironmentTypes getEnvironment()
 	{
@@ -31,12 +29,12 @@ public final class CustomMapProperties
 		this.terrainType = terrainType;
 	}
 
-	public Music getTheme()
+	public MapThemeTypes getTheme()
 	{
 		return theme;
 	}
 
-	public void setTheme(final Music theme)
+	public void setTheme(final MapThemeTypes theme)
 	{
 		this.theme = theme;
 	}

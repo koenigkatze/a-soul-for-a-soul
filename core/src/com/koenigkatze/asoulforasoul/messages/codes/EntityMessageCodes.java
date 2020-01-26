@@ -13,6 +13,7 @@ public enum EntityMessageCodes implements MessageCode
 	CREATE_NPC_ENTITY(3001), 
 	CREATE_PASSIVE_MAP_OBJECT(3002), 
 	CREATE_INFO_OBJECT(3003), 
+	CREATE_BLOCKED_OBJECT(3008),
 	
 	// Entity created
 	PLAYER_ENTITY_CREATED(3004), 
@@ -25,7 +26,7 @@ public enum EntityMessageCodes implements MessageCode
 	
 	// Mouse overs
 	MOUSE_OVER_RELEASED(3020),
-	MOUSE_OVER_INFO_OBJECT(3021), 
+	MOUSE_OVER_INFO_OBJECT(3021),  
 	
 	;
 	

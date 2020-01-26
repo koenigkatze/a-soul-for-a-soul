@@ -1,12 +1,9 @@
 package com.koenigkatze.asoulforasoul.game;
 
+import com.badlogic.gdx.Game;
 import com.koenigkatze.asoulforasoul.game.setup.BasicMessagingSetup;
 import com.koenigkatze.asoulforasoul.messages.codes.GameMessageCodes;
 import com.koenigkatze.asoulforasoul.messages.utils.MessageBuilder;
-
-import com.badlogic.gdx.Game;
-import com.badlogic.gdx.maps.tiled.TiledMap;
-import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 
 public final class SoulGame extends Game
 {

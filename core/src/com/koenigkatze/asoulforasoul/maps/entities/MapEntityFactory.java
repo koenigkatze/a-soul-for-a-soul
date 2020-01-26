@@ -1,5 +1,16 @@
 package com.koenigkatze.asoulforasoul.maps.entities;
 
+import com.badlogic.ashley.core.Entity;
+import com.badlogic.ashley.core.PooledEngine;
+import com.badlogic.gdx.audio.Sound;
+import com.badlogic.gdx.graphics.g2d.Animation;
+import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas.AtlasRegion;
+import com.badlogic.gdx.maps.tiled.objects.TiledMapTileMapObject;
+import com.badlogic.gdx.math.Vector3;
+import com.badlogic.gdx.physics.box2d.Body;
+import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
+import com.badlogic.gdx.physics.box2d.World;
 import com.koenigkatze.asoulforasoul.constants.ConversionConstants;
 import com.koenigkatze.asoulforasoul.entities.directions.EntityDirections;
 import com.koenigkatze.asoulforasoul.entities.maps.MapRenderComponent;
@@ -9,6 +20,7 @@ import com.koenigkatze.asoulforasoul.entities.states.EntityStates;
 import com.koenigkatze.asoulforasoul.entities.utils.EntityBuilder;
 import com.koenigkatze.asoulforasoul.level.InteractionBox;
 import com.koenigkatze.asoulforasoul.level.InteractionTarget;
+import com.koenigkatze.asoulforasoul.maps.general.BlockedObjectProperties;
 import com.koenigkatze.asoulforasoul.maps.general.Coordinate2d;
 import com.koenigkatze.asoulforasoul.maps.general.Dimension2d;
 import com.koenigkatze.asoulforasoul.maps.properties.character.CharacterMapProperties;
@@ -22,30 +34,21 @@ import com.koenigkatze.asoulforasoul.messages.utils.Messages;
 import com.koenigkatze.asoulforasoul.ui.EntityIcons;
 import com.koenigkatze.asoulforasoul.ui.UiMessageData;
 
-import com.badlogic.ashley.core.Entity;
-import com.badlogic.ashley.core.PooledEngine;
-import com.badlogic.gdx.audio.Sound;
-import com.badlogic.gdx.graphics.g2d.Animation;
-import com.badlogic.gdx.graphics.g2d.Sprite;
-import com.badlogic.gdx.graphics.g2d.TextureAtlas.AtlasRegion;
-import com.badlogic.gdx.maps.tiled.objects.TiledMapTileMapObject;
-import com.badlogic.gdx.math.Vector3;
-import com.badlogic.gdx.physics.box2d.Body;
-import com.badlogic.gdx.physics.box2d.World;
-
-public final class MapEntityFactory
-{
+public final class MapEntityFactory {
 	private final PooledEngine entityEngine;
 	private final BodyFactory bodyFactory;
 
-	public MapEntityFactory(final PooledEngine entityEngine, final World world)
-	{
+	public MapEntityFactory(final PooledEngine entityEngine, final World world) {
 		this.entityEngine = entityEngine;
 		this.bodyFactory = new BodyFactory(world);
 	}
 
-	public void createPlayerEntity(final CharacterMapProperties characterProperties)
-	{
+	public void createBlockedObject(BlockedObjectProperties blockedObjectProperties) {
+		bodyFactory.createRectangleBody(blockedObjectProperties.getPositionX(), blockedObjectProperties.getPositionY(),
+				blockedObjectProperties.getWidth(), blockedObjectProperties.getHeight(), BodyType.StaticBody);
+	}
+
+	public void createPlayerEntity(final CharacterMapProperties characterProperties) {
 		final Repository<Animation<AtlasRegion>> playerAnimationRepository = characterProperties
 				.getAnimationRepository();
 		final Sprite playerSprite = new Sprite(playerAnimationRepository
@@ -75,8 +78,7 @@ public final class MapEntityFactory
 		entityEngine.addEntity(mapEntity);
 	}
 
-	public void createNpcEntity(final CharacterMapProperties npcProperties)
-	{
+	public void createNpcEntity(final CharacterMapProperties npcProperties) {
 		final Repository<Animation<AtlasRegion>> npcAnimationRepository = npcProperties.getAnimationRepository();
 		final Sprite npcSprite = new Sprite(npcAnimationRepository
 				.get(AnimationKeys.get(npcProperties.getState(), npcProperties.getDirection())).getKeyFrame(0.0f));
@@ -95,8 +97,7 @@ public final class MapEntityFactory
 		entityEngine.addEntity(npcEntity);
 	}
 
-	public void createPassiveMapEntity(final TiledMapTileMapObject mapObject)
-	{
+	public void createPassiveMapEntity(final TiledMapTileMapObject mapObject) {
 		final Sprite sprite = new Sprite(mapObject.getTextureRegion());
 		final Entity entity = EntityBuilder.get().withSimpleSpriteProviderComponent(sprite)
 				.withPositionComponent(new Vector3(mapObject.getX(), mapObject.getY(), 0))
@@ -105,8 +106,7 @@ public final class MapEntityFactory
 		entityEngine.addEntity(entity);
 	}
 
-	public void createInfoObject(InfoObjectProperties infoObject)
-	{
+	public void createInfoObject(InfoObjectProperties infoObject) {
 		final Sprite sprite = new Sprite(infoObject.getTexture());
 		final Coordinate2d position = infoObject.getPosition();
 		final Body sensor = bodyFactory.createInteractionSensor(
@@ -114,12 +114,11 @@ public final class MapEntityFactory
 				(position.getY() + (sprite.getHeight() / 2)) / ConversionConstants.PIXELS_TO_METERS,
 				(2 * sprite.getWidth()) / ConversionConstants.PIXELS_TO_METERS,
 				(2 * sprite.getHeight()) / ConversionConstants.PIXELS_TO_METERS);
-		
-		final Dimension2d interactionBoxDimension = Dimension2d.of((2* sprite.getWidth()), (2*sprite.getHeight()));
+
+		final Dimension2d interactionBoxDimension = Dimension2d.of((2 * sprite.getWidth()), (2 * sprite.getHeight()));
 		final int halfInteractionBoxWidth = interactionBoxDimension.getWidth() / 2;
 		final int halfInteractionBoxHeight = interactionBoxDimension.getHeight() / 2;
-		final Coordinate2d interactionBoxPosition = position.traverse(
-				-halfInteractionBoxWidth,
+		final Coordinate2d interactionBoxPosition = position.traverse(-halfInteractionBoxWidth,
 				-halfInteractionBoxHeight);
 		final InteractionTarget interactionTarget = new InteractionTarget(
 				() -> Messages.publish(UiMessageCodes.DISPLAY_MESSAGE_BOX,

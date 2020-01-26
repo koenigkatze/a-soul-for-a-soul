@@ -4,7 +4,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import com.koenigkatze.asoulforasoul.maps.exceptions.MapObjectMissingAttributeException;
+import com.koenigkatze.asoulforasoul.maps.exceptions.MissingMapPropertyException;
 
 import com.badlogic.gdx.maps.MapProperties;
 
@@ -34,7 +34,7 @@ public class InfoObjectPropertiesMapper
 	{
 		for (final InfoObjectMapProperties singleProperty : mandatoryProperties) {
 			if (!mapProperties.containsKey(singleProperty.getTag()))
-				throw new MapObjectMissingAttributeException();
+				throw new MissingMapPropertyException();
 		}
 		
 	}

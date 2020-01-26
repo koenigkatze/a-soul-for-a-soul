@@ -1,17 +1,15 @@
-package com.koenigkatze.asoulforasoul.maps;
+package com.koenigkatze.asoulforasoul.maps.properties.custom;
 
 import com.koenigkatze.asoulforasoul.maps.exceptions.MissingMapPropertyException;
 import com.koenigkatze.asoulforasoul.maps.exceptions.UnknownMapPropertyValueException;
-import com.koenigkatze.asoulforasoul.maps.properties.custom.CustomMapPropertyTypes;
 import com.koenigkatze.asoulforasoul.maps.properties.general.MapProperty;
 
-public enum MapEnvironmentTypes implements MapProperty
-{
-	BEACH("beach"), FOREST("forest");
+public enum MapThemeTypes implements MapProperty {
+	NONE("none");
 
 	private final String tag;
 
-	MapEnvironmentTypes(final String tag) {
+	MapThemeTypes(final String tag) {
 		this.tag = tag;
 	}
 
@@ -19,12 +17,12 @@ public enum MapEnvironmentTypes implements MapProperty
 	public String getTag() {
 		return tag;
 	}
-	
-	public static MapEnvironmentTypes map(final String value) throws UnknownMapPropertyValueException {
+
+	public static MapThemeTypes map(String value) throws UnknownMapPropertyValueException {
 		if ("".equals(value)) {
-			throw new MissingMapPropertyException("Map property '"+CustomMapPropertyTypes.ENVIRONMENT.getTag()+"' must not be empty!");
+			throw new MissingMapPropertyException("Map property '"+CustomMapPropertyTypes.THEME.getTag()+"' must not be empty!");
 		}
-		MapEnvironmentTypes possibleValueOf = null;
+		MapThemeTypes possibleValueOf = null;
 		try {
 			possibleValueOf = valueOf(value.toUpperCase());
 		} catch (final IllegalArgumentException e) {
