@@ -33,7 +33,7 @@ import com.koenigkatze.asoulforasoul.entities.sprites.SpriteProviderComponent;
 import com.koenigkatze.asoulforasoul.entities.states.StateComponent;
 import com.koenigkatze.asoulforasoul.logging.Logging;
 import com.koenigkatze.asoulforasoul.maps.general.MapData;
-import com.koenigkatze.asoulforasoul.maps.general.MapLoader;
+import com.koenigkatze.asoulforasoul.maps.general.MapDataLoader;
 import com.koenigkatze.asoulforasoul.maps.general.MapObjectCreator;
 import com.koenigkatze.asoulforasoul.messages.codes.LevelMessageCodes;
 import com.koenigkatze.asoulforasoul.messages.codes.MessageCode;
@@ -61,7 +61,7 @@ public final class Level {
 
 		loadLevelSystems();
 
-		loadMapObjects("test_2.tmx");
+		createMapObjects("test_2.tmx");
 
 //		setUpAmbience();
 		// Definitiv ver-controllern hier!!!
@@ -87,7 +87,7 @@ public final class Level {
 
 		batch = new SpriteBatch();
 
-		mapData = MapLoader.loadFromStandardPath("test_2");
+		mapData = MapDataLoader.loadFromStandardPath("test_2");
 
 		final LevelData levelData = LevelData.builder("test", camera, inputController).withWorld(world)
 				.withEntityEngine(entityEngine).withBatch(batch).withTiledMap(mapData.getTiledMap()).build();
@@ -107,7 +107,7 @@ public final class Level {
 		Logging.logDebug(Level.class, "Level message endpoint registered.");
 	}
 
-	private void loadMapObjects(final String mapName) {
+	private void createMapObjects(final String mapName) {
 		MapObjectCreator.createFromMap(mapData.getTiledMap());
 	}
 

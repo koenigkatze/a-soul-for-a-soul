@@ -24,7 +24,7 @@ public final class CustomMapPropertiesMapper {
 		customMapProperties.setTerrainType(MapTerrainTypes.map(terrainTypeValue));
 
 		final String themeValue = (String) mapProperties.get(CustomMapPropertyTypes.THEME.getTag());
-		customMapProperties.setTheme(MapThemeTypes.map(themeValue));
+		customMapProperties.setTheme(themeValue);
 
 		return customMapProperties;
 	}

@@ -1,4 +1,4 @@
-package com.koenigkatze.asoulforasoul.media.music;
+package com.koenigkatze.asoulforasoul.media.exceptions;
 
 public class UnknownMediaException extends RuntimeException
 {

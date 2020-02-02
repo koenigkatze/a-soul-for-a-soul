@@ -1,7 +1,7 @@
 package com.koenigkatze.asoulforasoul.level;
 
-import com.koenigkatze.asoulforasoul.maps.general.Coordinate2d;
-import com.koenigkatze.asoulforasoul.maps.general.Dimension2d;
+import com.koenigkatze.asoulforasoul.game.world.Coordinate2d;
+import com.koenigkatze.asoulforasoul.game.world.Dimension2d;
 
 public final class InteractionBox
 {

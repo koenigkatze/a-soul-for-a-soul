@@ -7,8 +7,8 @@ import java.util.Set;
 import com.badlogic.gdx.maps.MapProperties;
 import com.koenigkatze.asoulforasoul.entities.directions.EntityDirections;
 import com.koenigkatze.asoulforasoul.entities.states.EntityStates;
+import com.koenigkatze.asoulforasoul.game.world.Coordinate2d;
 import com.koenigkatze.asoulforasoul.maps.exceptions.MissingMapPropertyException;
-import com.koenigkatze.asoulforasoul.maps.general.Coordinate2d;
 import com.koenigkatze.asoulforasoul.media.animations.AnimationRepositories;
 
 public final class CharacterMapPropertiesMapper {

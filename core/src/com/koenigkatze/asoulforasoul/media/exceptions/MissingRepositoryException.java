@@ -1,4 +1,4 @@
-package com.koenigkatze.asoulforasoul.media.animations;
+package com.koenigkatze.asoulforasoul.media.exceptions;
 
 public final class MissingRepositoryException extends RuntimeException
 {

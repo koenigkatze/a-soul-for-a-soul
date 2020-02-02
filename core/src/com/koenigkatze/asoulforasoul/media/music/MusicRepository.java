@@ -4,6 +4,7 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;
 
+import com.koenigkatze.asoulforasoul.media.exceptions.UnknownMediaException;
 import com.koenigkatze.asoulforasoul.media.repositories.Repository;
 import com.koenigkatze.asoulforasoul.media.repositories.RepositoryKey;
 

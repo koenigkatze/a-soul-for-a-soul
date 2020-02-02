@@ -7,8 +7,7 @@ import com.badlogic.gdx.maps.MapProperties;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.objects.TiledMapTileMapObject;
-import com.badlogic.gdx.math.Rectangle;
-import com.koenigkatze.asoulforasoul.constants.ConversionConstants;
+import com.koenigkatze.asoulforasoul.game.world.Coordinate2d;
 import com.koenigkatze.asoulforasoul.logging.Logging;
 import com.koenigkatze.asoulforasoul.maps.MapObjectLayers;
 import com.koenigkatze.asoulforasoul.maps.entities.MapEntityTypes;
@@ -28,22 +27,13 @@ public final class MapObjectCreator {
 		final MapAccess mapAccess = new MapAccess(tiledMap);
 
 		createBlockedMapParts(mapAccess.getRectangleMapObjectsForLayer(MapObjectLayers.BLOCKED.getName()));
-		createCharacterEntities(mapAccess.getAllObjectsForLayer(MapObjectLayers.POSITIONS.getName()));
+		createCharacterEntities(mapAccess.getAllObjectsForLayer(MapObjectLayers.ENTITY_STARTING_POSITIONS.getName()));
 		createPassiveMapObjects(mapAccess.getAllObjectsForLayer(MapObjectLayers.PASSIVE_MAP_OBJECTS.getName()));
 		createActiveMapObjects(mapAccess.getAllObjectsForLayer(MapObjectLayers.ACTIVE_MAP_OBJECTS.getName()));
 	}
 
 	private static void createBlockedMapParts(final Collection<RectangleMapObject> blockedMapObjects) {
-		for (final RectangleMapObject singleMapObject : blockedMapObjects) {
-			final Rectangle rectangle = singleMapObject.getRectangle();
-			final BlockedObjectProperties blockedObjectProperties = BlockedObjectProperties.of(
-					(rectangle.x + (rectangle.width / 2)) / ConversionConstants.PIXELS_TO_METERS,
-					(rectangle.y + (rectangle.height / 2)) / ConversionConstants.PIXELS_TO_METERS,
-					rectangle.width / ConversionConstants.PIXELS_TO_METERS,
-					rectangle.height / ConversionConstants.PIXELS_TO_METERS);
-
-			Messages.publish(EntityMessageCodes.CREATE_BLOCKED_OBJECT, blockedObjectProperties);
-		}
+		BlockedMapPartsCreator.createFromCollection(blockedMapObjects);
 	}
 
 	/*
@@ -104,7 +94,7 @@ public final class MapObjectCreator {
 					}
 					final String infoText = (String) infoTextRaw;
 					Messages.publish(EntityMessageCodes.CREATE_INFO_OBJECT,
-							new InfoObjectProperties(Coordinate2d.of(mapObject.getX(), mapObject.getY()),
+							InfoObjectProperties.of(Coordinate2d.of(mapObject.getX(), mapObject.getY()),
 									mapObject.getTextureRegion(), infoText));
 					break;
 				default:

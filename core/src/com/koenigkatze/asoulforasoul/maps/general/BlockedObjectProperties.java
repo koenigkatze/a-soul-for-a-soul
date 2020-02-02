@@ -1,5 +1,7 @@
 package com.koenigkatze.asoulforasoul.maps.general;
 
+import com.koenigkatze.asoulforasoul.game.world.CoordinateConverter;
+
 public final class BlockedObjectProperties {
 
 	private final float positionX;
@@ -15,9 +17,28 @@ public final class BlockedObjectProperties {
 		this.height = height;
 	}
 
-	public static BlockedObjectProperties of(final float positionX, final float positionY, final float width,
+	public static BlockedObjectProperties of(
+			final float positionX, 
+			final float positionY, 
+			final float width,
 			final float height) {
-		return new BlockedObjectProperties(positionX, positionY, width, height);
+		return new BlockedObjectProperties(
+				positionX, 
+				positionY,
+				width, 
+				height);
+	}
+
+	public static BlockedObjectProperties convertFrom(
+			final float positionX, 
+			final float positionY, 
+			final float halfWidth,
+			final float halfHeight) {
+		return new BlockedObjectProperties(
+				CoordinateConverter.convertToPhysicsScale(positionX),
+				CoordinateConverter.convertToPhysicsScale(positionY), 
+				CoordinateConverter.convertToPhysicsScale(halfWidth),
+				CoordinateConverter.convertToPhysicsScale(halfHeight));
 	}
 
 	public float getPositionX() {

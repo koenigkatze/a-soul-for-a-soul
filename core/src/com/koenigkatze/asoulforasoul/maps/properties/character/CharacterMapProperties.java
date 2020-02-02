@@ -2,7 +2,7 @@ package com.koenigkatze.asoulforasoul.maps.properties.character;
 
 import com.koenigkatze.asoulforasoul.entities.directions.EntityDirections;
 import com.koenigkatze.asoulforasoul.entities.states.EntityStates;
-import com.koenigkatze.asoulforasoul.maps.general.Coordinate2d;
+import com.koenigkatze.asoulforasoul.game.world.Coordinate2d;
 import com.koenigkatze.asoulforasoul.media.repositories.Repository;
 
 import com.badlogic.gdx.graphics.g2d.Animation;

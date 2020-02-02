@@ -9,7 +9,7 @@ import com.koenigkatze.asoulforasoul.maps.properties.custom.CustomMapProperties;
 import com.koenigkatze.asoulforasoul.maps.properties.custom.CustomMapPropertiesMapper;
 import com.koenigkatze.asoulforasoul.maps.properties.general.GeneralMapObjectProperties;
 
-public class MapLoader {
+public class MapDataLoader {
 	public static MapData loadFromStandardPath(final String name) {
 		final TiledMap tiledMap = new TmxMapLoader()
 				.load(FileConstants.MAPS_STANDARD_PATH + name + FileConstants.TILD_MAP_FILE_ENDING);

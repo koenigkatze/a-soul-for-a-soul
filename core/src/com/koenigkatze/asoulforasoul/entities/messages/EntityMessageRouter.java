@@ -5,6 +5,7 @@ import com.badlogic.gdx.maps.tiled.objects.TiledMapTileMapObject;
 import com.koenigkatze.asoulforasoul.level.LevelData;
 import com.koenigkatze.asoulforasoul.logging.Logging;
 import com.koenigkatze.asoulforasoul.maps.entities.MapEntityFactory;
+import com.koenigkatze.asoulforasoul.maps.general.BlockedObjectBulkProperties;
 import com.koenigkatze.asoulforasoul.maps.general.BlockedObjectProperties;
 import com.koenigkatze.asoulforasoul.maps.properties.character.CharacterMapProperties;
 import com.koenigkatze.asoulforasoul.maps.properties.info.InfoObjectProperties;
@@ -38,8 +39,8 @@ public final class EntityMessageRouter extends MessageRouterAdapter
 			}
 			final BlockedObjectProperties blockedObjectProperties = (BlockedObjectProperties) payload;
 			entityFactory.createBlockedObject(blockedObjectProperties);
-			Logging.logDebug(EntityMessageRouter.class, "Npc entity created: " + blockedObjectProperties);
-			break;
+			Logging.logDebug(EntityMessageRouter.class, "Blocked object created: " + blockedObjectProperties);
+			return true;
 		case CREATE_PLAYER_ENTITY:
 			if (!(payload instanceof CharacterMapProperties))
 			{
@@ -89,6 +90,16 @@ public final class EntityMessageRouter extends MessageRouterAdapter
 			final InfoObjectProperties infoObject = (InfoObjectProperties) payload;
 			entityFactory.createInfoObject(infoObject);
 			Logging.logDebug(EntityMessageRouter.class, "Info object created: " + infoObject);
+			return true;
+		case BULK_CREATE_BLOCKED_OBJECT:
+			if (!(payload instanceof BlockedObjectBulkProperties)) {
+				Logging.logError(EntityMessageRouter.class,
+						"Bulk creating blocked objects failed. Payload not instance of BlockedObjectBulkProperties: " + payload);
+				return false;
+			}
+			final BlockedObjectBulkProperties bulkProperties = (BlockedObjectBulkProperties) payload;
+			entityFactory.bulkCreateBlockedObject(bulkProperties);
+			Logging.logDebug(EntityMessageRouter.class, "Bulk created blocked objects: " + bulkProperties);
 			return true;
 		default:
 			break;

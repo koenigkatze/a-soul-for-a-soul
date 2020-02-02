@@ -1,6 +1,7 @@
 package com.koenigkatze.asoulforasoul.media.music;
 
 import com.koenigkatze.asoulforasoul.logging.Logging;
+import com.koenigkatze.asoulforasoul.media.exceptions.UnknownMediaException;
 import com.koenigkatze.asoulforasoul.messages.codes.MusicMessageCodes;
 import com.koenigkatze.asoulforasoul.messages.routing.MessageRouterAdapter;
 

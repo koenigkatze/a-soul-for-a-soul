@@ -11,6 +11,7 @@ import com.badlogic.gdx.maps.MapLayer;
 import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
+import com.koenigkatze.asoulforasoul.game.world.Coordinate2d;
 
 public final class MapAccess
 {

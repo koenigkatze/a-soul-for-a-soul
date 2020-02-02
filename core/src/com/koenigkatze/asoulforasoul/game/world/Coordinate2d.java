@@ -1,4 +1,4 @@
-package com.koenigkatze.asoulforasoul.maps.general;
+package com.koenigkatze.asoulforasoul.game.world;
 
 public final class Coordinate2d
 {
@@ -37,5 +37,5 @@ public final class Coordinate2d
 	{
 		return new Coordinate2d(x+xAmount, y+yAmount);
 	}
-
+	
 }

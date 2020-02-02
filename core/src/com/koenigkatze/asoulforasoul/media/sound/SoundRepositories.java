@@ -4,7 +4,7 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;
 
-import com.koenigkatze.asoulforasoul.media.animations.MissingRepositoryException;
+import com.koenigkatze.asoulforasoul.media.exceptions.MissingRepositoryException;
 import com.koenigkatze.asoulforasoul.media.repositories.Repository;
 
 import com.badlogic.gdx.audio.Sound;

@@ -1,4 +1,4 @@
-package com.koenigkatze.asoulforasoul.maps.general;
+package com.koenigkatze.asoulforasoul.game.world;
 
 public final class Dimension2d
 {

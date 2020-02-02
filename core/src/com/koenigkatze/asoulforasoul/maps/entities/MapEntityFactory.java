@@ -18,11 +18,12 @@ import com.koenigkatze.asoulforasoul.entities.physics.BodyComponent;
 import com.koenigkatze.asoulforasoul.entities.physics.BodyFactory;
 import com.koenigkatze.asoulforasoul.entities.states.EntityStates;
 import com.koenigkatze.asoulforasoul.entities.utils.EntityBuilder;
+import com.koenigkatze.asoulforasoul.game.world.Coordinate2d;
+import com.koenigkatze.asoulforasoul.game.world.Dimension2d;
 import com.koenigkatze.asoulforasoul.level.InteractionBox;
 import com.koenigkatze.asoulforasoul.level.InteractionTarget;
+import com.koenigkatze.asoulforasoul.maps.general.BlockedObjectBulkProperties;
 import com.koenigkatze.asoulforasoul.maps.general.BlockedObjectProperties;
-import com.koenigkatze.asoulforasoul.maps.general.Coordinate2d;
-import com.koenigkatze.asoulforasoul.maps.general.Dimension2d;
 import com.koenigkatze.asoulforasoul.maps.properties.character.CharacterMapProperties;
 import com.koenigkatze.asoulforasoul.maps.properties.info.InfoObjectProperties;
 import com.koenigkatze.asoulforasoul.media.animations.AnimationKeys;
@@ -43,9 +44,16 @@ public final class MapEntityFactory {
 		this.bodyFactory = new BodyFactory(world);
 	}
 
-	public void createBlockedObject(BlockedObjectProperties blockedObjectProperties) {
+	public void createBlockedObject(final BlockedObjectProperties blockedObjectProperties) {
 		bodyFactory.createRectangleBody(blockedObjectProperties.getPositionX(), blockedObjectProperties.getPositionY(),
 				blockedObjectProperties.getWidth(), blockedObjectProperties.getHeight(), BodyType.StaticBody);
+	}
+
+	public void bulkCreateBlockedObject(final BlockedObjectBulkProperties bulkProperties) {
+		for (final BlockedObjectProperties singlePropertey : bulkProperties.getCollectionOfProperties()) {
+			bodyFactory.createRectangleBody(singlePropertey.getPositionX(), singlePropertey.getPositionY(),
+					singlePropertey.getWidth(), singlePropertey.getHeight(), BodyType.StaticBody);
+		}
 	}
 
 	public void createPlayerEntity(final CharacterMapProperties characterProperties) {
@@ -106,7 +114,7 @@ public final class MapEntityFactory {
 		entityEngine.addEntity(entity);
 	}
 
-	public void createInfoObject(InfoObjectProperties infoObject) {
+	public void createInfoObject(final InfoObjectProperties infoObject) {
 		final Sprite sprite = new Sprite(infoObject.getTexture());
 		final Coordinate2d position = infoObject.getPosition();
 		final Body sensor = bodyFactory.createInteractionSensor(

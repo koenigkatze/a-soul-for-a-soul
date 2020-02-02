@@ -7,7 +7,7 @@ public final class CustomMapProperties
 {
 	private MapEnvironmentTypes environment;
 	private MapTerrainTypes terrainType;
-	private MapThemeTypes theme;
+	private String theme;
 
 	public MapEnvironmentTypes getEnvironment()
 	{
@@ -29,12 +29,12 @@ public final class CustomMapProperties
 		this.terrainType = terrainType;
 	}
 
-	public MapThemeTypes getTheme()
+	public String getTheme()
 	{
 		return theme;
 	}
 
-	public void setTheme(final MapThemeTypes theme)
+	public void setTheme(final String theme)
 	{
 		this.theme = theme;
 	}

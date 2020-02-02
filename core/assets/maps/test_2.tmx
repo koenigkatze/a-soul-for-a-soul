@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.2" tiledversion="1.2.0" orientation="orthogonal" renderorder="left-up" width="32" height="32" tilewidth="16" tileheight="16" infinite="0" nextlayerid="4" nextobjectid="2">
+<map version="1.2" tiledversion="1.2.0" orientation="orthogonal" renderorder="left-up" width="32" height="32" tilewidth="16" tileheight="16" infinite="0" nextlayerid="5" nextobjectid="7">
  <properties>
   <property name="environment" value="forest"/>
   <property name="terraintype" value="grass"/>
@@ -80,7 +80,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <objectgroup id="2" name="positions">
+ <objectgroup id="2" name="entity_starting_positions">
   <object id="1" name="player_start" type="player" x="246" y="236">
    <properties>
     <property name="direction" value="UP"/>
@@ -89,5 +89,20 @@
    </properties>
    <point/>
   </object>
+  <object id="2" name="bald_start" type="npc" x="391" y="180">
+   <properties>
+    <property name="ai_state" value="WANDER"/>
+    <property name="direction" value="DOWN"/>
+    <property name="state" value="STAND"/>
+    <property name="texture_atlas" value="bald"/>
+   </properties>
+   <point/>
+  </object>
+ </objectgroup>
+ <objectgroup id="4" name="blocked">
+  <object id="3" x="0" y="0" width="512" height="16"/>
+  <object id="4" x="0" y="496" width="512" height="16"/>
+  <object id="5" x="0" y="16" width="16" height="480"/>
+  <object id="6" x="496" y="16" width="16" height="480"/>
  </objectgroup>
 </map>
