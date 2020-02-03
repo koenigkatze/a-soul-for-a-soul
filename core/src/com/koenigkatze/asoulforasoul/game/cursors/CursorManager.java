@@ -1,9 +1,8 @@
 package com.koenigkatze.asoulforasoul.game.cursors;
 
-import com.koenigkatze.asoulforasoul.level.InteractionTarget;
-
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Cursor;
+import com.koenigkatze.asoulforasoul.entities.interaction.InteractionTarget;
 
 public class CursorManager
 {

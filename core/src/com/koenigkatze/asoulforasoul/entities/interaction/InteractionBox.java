@@ -1,4 +1,4 @@
-package com.koenigkatze.asoulforasoul.level;
+package com.koenigkatze.asoulforasoul.entities.interaction;
 
 import com.koenigkatze.asoulforasoul.game.world.Coordinate2d;
 import com.koenigkatze.asoulforasoul.game.world.Dimension2d;

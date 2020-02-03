@@ -1,7 +1,5 @@
 package com.koenigkatze.asoulforasoul.entities.interaction;
 
-import com.koenigkatze.asoulforasoul.level.InteractionTarget;
-
 import com.badlogic.ashley.core.Component;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.utils.Pool.Poolable;

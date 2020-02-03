@@ -1,4 +1,4 @@
-package com.koenigkatze.asoulforasoul.level;
+package com.koenigkatze.asoulforasoul.entities.interaction;
 
 public interface SensorTarget
 {

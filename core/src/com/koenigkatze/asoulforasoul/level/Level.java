@@ -51,17 +51,17 @@ public final class Level {
 	private PooledEngine entityEngine;
 	private LevelInputController inputController;
 
-	public void load() {
+	public void load(final String name) {
 		inputController = new LevelInputController();
 		Gdx.input.setInputProcessor(inputController);
 
 		registerLevelEndpoint();
 
-		loadLevelData();
+		loadLevelData(name);
 
 		loadLevelSystems();
 
-		createMapObjects("test_2.tmx");
+		createMapObjects();
 
 //		setUpAmbience();
 		// Definitiv ver-controllern hier!!!
@@ -71,8 +71,8 @@ public final class Level {
 //		sound.setVolume(id, 0.25f);
 	}
 
-	private void loadLevelData() {
-		Messages.publish(LevelMessageCodes.LEVEL_DATA_LOADING, "test_2");
+	private void loadLevelData(final String name) {
+		Messages.publish(LevelMessageCodes.LEVEL_DATA_LOADING, name);
 
 		camera = new OrthographicCamera();
 		camera.setToOrtho(false);
@@ -87,7 +87,7 @@ public final class Level {
 
 		batch = new SpriteBatch();
 
-		mapData = MapDataLoader.loadFromStandardPath("test_2");
+		mapData = MapDataLoader.loadFromStandardPath(name);
 
 		final LevelData levelData = LevelData.builder("test", camera, inputController).withWorld(world)
 				.withEntityEngine(entityEngine).withBatch(batch).withTiledMap(mapData.getTiledMap()).build();
@@ -107,7 +107,7 @@ public final class Level {
 		Logging.logDebug(Level.class, "Level message endpoint registered.");
 	}
 
-	private void createMapObjects(final String mapName) {
+	private void createMapObjects() {
 		MapObjectCreator.createFromMap(mapData.getTiledMap());
 	}
 

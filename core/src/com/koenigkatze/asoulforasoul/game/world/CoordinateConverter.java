@@ -2,10 +2,14 @@ package com.koenigkatze.asoulforasoul.game.world;
 
 import com.koenigkatze.asoulforasoul.constants.ConversionConstants;
 
-public class CoordinateConverter {
+public final class CoordinateConverter {
 
-	public static float convertToPhysicsScale(float value) {
+	public static float convertToPhysicsScale(final float value) {
 		return value / ConversionConstants.PIXELS_TO_METERS;
 	}
-	
+
+	public static float convertFromPhysicsScale(final float value) {
+		return value * ConversionConstants.PIXELS_TO_METERS;
+	}
+
 }

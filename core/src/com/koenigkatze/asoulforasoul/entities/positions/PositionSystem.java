@@ -1,14 +1,13 @@
 package com.koenigkatze.asoulforasoul.entities.positions;
 
-import com.koenigkatze.asoulforasoul.constants.ConversionConstants;
-import com.koenigkatze.asoulforasoul.entities.physics.BodyComponent;
-
 import com.badlogic.ashley.core.ComponentMapper;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
+import com.koenigkatze.asoulforasoul.entities.physics.BodyComponent;
+import com.koenigkatze.asoulforasoul.game.world.CoordinateConverter;
 
 public final class PositionSystem extends IteratingSystem
 {
@@ -31,8 +30,9 @@ public final class PositionSystem extends IteratingSystem
 		final Body body = bodyComponent.getBody();
 		final Vector2 bodyPosition = body.getPosition();
 
-		positionComponent.setPositionIn2d(bodyPosition.x * ConversionConstants.PIXELS_TO_METERS,
-				bodyPosition.y * ConversionConstants.PIXELS_TO_METERS);
+		positionComponent.setPositionIn2d(
+				CoordinateConverter.convertFromPhysicsScale(bodyPosition.x),
+				CoordinateConverter.convertFromPhysicsScale(bodyPosition.y));
 
 	}
 }

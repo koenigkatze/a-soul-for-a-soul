@@ -1,6 +1,5 @@
 package com.koenigkatze.asoulforasoul.entities.interaction;
 
-import com.koenigkatze.asoulforasoul.level.InteractionBox;
 import com.koenigkatze.asoulforasoul.logging.Logging;
 import com.koenigkatze.asoulforasoul.messages.codes.EntityMessageCodes;
 import com.koenigkatze.asoulforasoul.messages.utils.Messages;

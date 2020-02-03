@@ -1,9 +1,9 @@
 package com.koenigkatze.asoulforasoul.game.messages;
 
+import com.koenigkatze.asoulforasoul.entities.interaction.InteractionTarget;
 import com.koenigkatze.asoulforasoul.game.cursors.CursorManager;
 import com.koenigkatze.asoulforasoul.game.screens.ScreenManager;
 import com.koenigkatze.asoulforasoul.game.screens.Screens;
-import com.koenigkatze.asoulforasoul.level.InteractionTarget;
 import com.koenigkatze.asoulforasoul.logging.Logging;
 import com.koenigkatze.asoulforasoul.messages.codes.EntityMessageCodes;
 import com.koenigkatze.asoulforasoul.messages.codes.GameMessageCodes;

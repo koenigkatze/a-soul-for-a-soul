@@ -1,13 +1,5 @@
 package com.koenigkatze.asoulforasoul.game.screens;
 
-import com.koenigkatze.asoulforasoul.level.Level;
-import com.koenigkatze.asoulforasoul.logging.Logging;
-import com.koenigkatze.asoulforasoul.messages.codes.MessageCode;
-import com.koenigkatze.asoulforasoul.messages.codes.UiMessageCodes;
-import com.koenigkatze.asoulforasoul.messages.routing.MessageEndpoint;
-import com.koenigkatze.asoulforasoul.ui.UiManager;
-import com.koenigkatze.asoulforasoul.ui.UiMessageEndpoint;
-
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.ai.GdxAI;
@@ -15,6 +7,13 @@ import com.badlogic.gdx.ai.msg.MessageManager;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.koenigkatze.asoulforasoul.level.Level;
+import com.koenigkatze.asoulforasoul.logging.Logging;
+import com.koenigkatze.asoulforasoul.messages.codes.MessageCode;
+import com.koenigkatze.asoulforasoul.messages.codes.UiMessageCodes;
+import com.koenigkatze.asoulforasoul.messages.routing.MessageEndpoint;
+import com.koenigkatze.asoulforasoul.ui.UiManager;
+import com.koenigkatze.asoulforasoul.ui.UiMessageEndpoint;
 
 public final class GameScreen extends ScreenAdapter
 {
@@ -27,7 +26,7 @@ public final class GameScreen extends ScreenAdapter
 	public void show()
 	{
 		level = new Level();
-		level.load();
+		level.load("test_2");
 
 		uiManager = new UiManager();
 		registerUiEndpoint();

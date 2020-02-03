@@ -3,6 +3,7 @@ package com.koenigkatze.asoulforasoul.level;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.koenigkatze.asoulforasoul.entities.interaction.InteractionTarget;
 import com.koenigkatze.asoulforasoul.logging.Logging;
 import com.koenigkatze.asoulforasoul.messages.codes.EntityMessageCodes;
 import com.koenigkatze.asoulforasoul.messages.codes.GameMessageCodes;

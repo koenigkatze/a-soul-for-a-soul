@@ -6,6 +6,7 @@ import java.util.List;
 import com.koenigkatze.asoulforasoul.entities.directions.DirectionalComponent;
 import com.koenigkatze.asoulforasoul.entities.directions.EntityDirections;
 import com.koenigkatze.asoulforasoul.entities.interaction.InteractionComponent;
+import com.koenigkatze.asoulforasoul.entities.interaction.InteractionTarget;
 import com.koenigkatze.asoulforasoul.entities.physics.BodyComponent;
 import com.koenigkatze.asoulforasoul.entities.players.PlayerComponent;
 import com.koenigkatze.asoulforasoul.entities.positions.PositionComponent;
@@ -15,7 +16,6 @@ import com.koenigkatze.asoulforasoul.entities.sprites.SpriteProviderComponent;
 import com.koenigkatze.asoulforasoul.entities.sprites.StateBasedAnimationSpriteProvider;
 import com.koenigkatze.asoulforasoul.entities.states.EntityStates;
 import com.koenigkatze.asoulforasoul.entities.states.StateComponent;
-import com.koenigkatze.asoulforasoul.level.InteractionTarget;
 import com.koenigkatze.asoulforasoul.media.repositories.Repository;
 
 import com.badlogic.ashley.core.Component;

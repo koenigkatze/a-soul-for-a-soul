@@ -11,17 +11,17 @@ import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
 import com.badlogic.gdx.physics.box2d.World;
-import com.koenigkatze.asoulforasoul.constants.ConversionConstants;
 import com.koenigkatze.asoulforasoul.entities.directions.EntityDirections;
+import com.koenigkatze.asoulforasoul.entities.interaction.InteractionBox;
+import com.koenigkatze.asoulforasoul.entities.interaction.InteractionTarget;
 import com.koenigkatze.asoulforasoul.entities.maps.MapRenderComponent;
 import com.koenigkatze.asoulforasoul.entities.physics.BodyComponent;
 import com.koenigkatze.asoulforasoul.entities.physics.BodyFactory;
 import com.koenigkatze.asoulforasoul.entities.states.EntityStates;
 import com.koenigkatze.asoulforasoul.entities.utils.EntityBuilder;
 import com.koenigkatze.asoulforasoul.game.world.Coordinate2d;
+import com.koenigkatze.asoulforasoul.game.world.CoordinateConverter;
 import com.koenigkatze.asoulforasoul.game.world.Dimension2d;
-import com.koenigkatze.asoulforasoul.level.InteractionBox;
-import com.koenigkatze.asoulforasoul.level.InteractionTarget;
 import com.koenigkatze.asoulforasoul.maps.general.BlockedObjectBulkProperties;
 import com.koenigkatze.asoulforasoul.maps.general.BlockedObjectProperties;
 import com.koenigkatze.asoulforasoul.maps.properties.character.CharacterMapProperties;
@@ -65,10 +65,10 @@ public final class MapEntityFactory {
 
 		final Coordinate2d playerMapPosition = characterProperties.getPosition();
 		final Body playerBody = bodyFactory.createCharacterBody(
-				playerMapPosition.getX() / ConversionConstants.PIXELS_TO_METERS,
-				playerMapPosition.getY() / ConversionConstants.PIXELS_TO_METERS,
-				playerSprite.getWidth() / ConversionConstants.PIXELS_TO_METERS,
-				(playerSprite.getHeight() - playerSprite.getHeight() / 3) / ConversionConstants.PIXELS_TO_METERS);
+				CoordinateConverter.convertToPhysicsScale(playerMapPosition.getX()),
+				CoordinateConverter.convertToPhysicsScale(playerMapPosition.getY()),
+				CoordinateConverter.convertToPhysicsScale(playerSprite.getWidth()),
+				CoordinateConverter.convertToPhysicsScale(playerSprite.getHeight() - playerSprite.getHeight() / 3));
 
 		final Vector3 playerPosition = new Vector3(playerMapPosition.getX(), playerMapPosition.getY(), 0);
 		final Repository<Sound> soundRepository = SoundRepositories.getEntityRepository();
@@ -93,10 +93,10 @@ public final class MapEntityFactory {
 
 		final Coordinate2d npcMapPosition = npcProperties.getPosition();
 		final Body npcBody = bodyFactory.createCharacterBody(
-				npcMapPosition.getX() / ConversionConstants.PIXELS_TO_METERS,
-				npcMapPosition.getY() / ConversionConstants.PIXELS_TO_METERS,
-				npcSprite.getWidth() / ConversionConstants.PIXELS_TO_METERS,
-				(npcSprite.getHeight() - npcSprite.getHeight() / 3) / ConversionConstants.PIXELS_TO_METERS);
+				CoordinateConverter.convertToPhysicsScale(npcMapPosition.getX()),
+				CoordinateConverter.convertToPhysicsScale(npcMapPosition.getY()),
+				CoordinateConverter.convertToPhysicsScale(npcSprite.getWidth()),
+				CoordinateConverter.convertToPhysicsScale((npcSprite.getHeight() - npcSprite.getHeight() / 3)));
 
 		final Vector3 npcPosition = new Vector3(npcMapPosition.getX(), npcMapPosition.getY(), 0);
 		final Entity npcEntity = EntityBuilder.get().withBodyComponent(npcBody).withPositionComponent(npcPosition)
@@ -118,10 +118,10 @@ public final class MapEntityFactory {
 		final Sprite sprite = new Sprite(infoObject.getTexture());
 		final Coordinate2d position = infoObject.getPosition();
 		final Body sensor = bodyFactory.createInteractionSensor(
-				(position.getX() + (sprite.getWidth() / 2)) / ConversionConstants.PIXELS_TO_METERS,
-				(position.getY() + (sprite.getHeight() / 2)) / ConversionConstants.PIXELS_TO_METERS,
-				(2 * sprite.getWidth()) / ConversionConstants.PIXELS_TO_METERS,
-				(2 * sprite.getHeight()) / ConversionConstants.PIXELS_TO_METERS);
+				CoordinateConverter.convertToPhysicsScale(position.getX() + (sprite.getWidth() / 2)),
+				CoordinateConverter.convertToPhysicsScale(position.getY() + (sprite.getHeight() / 2)),
+				CoordinateConverter.convertToPhysicsScale(2 * sprite.getWidth()),
+				CoordinateConverter.convertToPhysicsScale(2 * sprite.getHeight()));
 
 		final Dimension2d interactionBoxDimension = Dimension2d.of((2 * sprite.getWidth()), (2 * sprite.getHeight()));
 		final int halfInteractionBoxWidth = interactionBoxDimension.getWidth() / 2;
