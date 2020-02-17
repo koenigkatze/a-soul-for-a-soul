@@ -11,21 +11,24 @@ import com.koenigkatze.asoulforasoul.maps.exceptions.MissingMapPropertyException
 
 public final class CustomMapPropertiesMapper {
 	private static final Set<CustomMapPropertyTypes> OUTSIDE_PROPERTIES = new HashSet<>(Arrays.asList(
-			CustomMapPropertyTypes.ENVIRONMENT, CustomMapPropertyTypes.TERRAINTYPE, CustomMapPropertyTypes.THEME));
+			CustomMapPropertyTypes.ENVIRONMENT, CustomMapPropertyTypes.TERRAINTYPE, CustomMapPropertyTypes.THEME, CustomMapPropertyTypes.CAMERA));
 
 	public static CustomMapProperties loadOutsideProperties(String mapName, final MapProperties mapProperties) {
 		testProperties(mapName, mapProperties);
 		final CustomMapProperties customMapProperties = new CustomMapProperties();
 
 		final String environmentValue = (String) mapProperties.get(CustomMapPropertyTypes.ENVIRONMENT.getTag());
-		customMapProperties.setEnvironment(MapEnvironmentTypes.map(environmentValue));
+		customMapProperties.setEnvironmentType(MapEnvironmentTypes.map(environmentValue));
 
 		final String terrainTypeValue = (String) mapProperties.get(CustomMapPropertyTypes.TERRAINTYPE.getTag());
 		customMapProperties.setTerrainType(MapTerrainTypes.map(terrainTypeValue));
 
 		final String themeValue = (String) mapProperties.get(CustomMapPropertyTypes.THEME.getTag());
 		customMapProperties.setTheme(themeValue);
-
+		
+		final String cameraValue = (String) mapProperties.get(CustomMapPropertyTypes.CAMERA.getTag());
+		customMapProperties.setCameraType(CameraTypes.map(cameraValue));
+		
 		return customMapProperties;
 	}
 
@@ -33,7 +36,7 @@ public final class CustomMapPropertiesMapper {
 		for (final CustomMapPropertyTypes singleProperty : OUTSIDE_PROPERTIES) {
 			if (!mapProperties.containsKey(singleProperty.getTag()))
 				throw new MissingMapPropertyException(
-						"Map property missing: '" + singleProperty.getTag() + "' for map type 'outside' in map with name '" + mapName + "'. "
+						"Map property missing: '" + singleProperty.getTag() + "' in map with name '" + mapName + "'. "
 								+ "This property is mandatory.");
 		}
 	}

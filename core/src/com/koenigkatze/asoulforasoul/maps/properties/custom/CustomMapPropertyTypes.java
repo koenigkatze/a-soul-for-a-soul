@@ -5,7 +5,7 @@ import com.koenigkatze.asoulforasoul.maps.properties.general.MapProperty;
 
 public enum CustomMapPropertyTypes implements MapProperty
 {
-	ENVIRONMENT("environment"), TERRAINTYPE("terraintype"), THEME("theme");
+	ENVIRONMENT("environment"), TERRAINTYPE("terraintype"), THEME("theme"), CAMERA("camera");
 	
 	private final String tag;
 

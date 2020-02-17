@@ -1,4 +1,4 @@
-package com.koenigkatze.asoulforasoul.level;
+package com.koenigkatze.asoulforasoul.entities;
 
 import com.badlogic.gdx.physics.box2d.Contact;
 import com.badlogic.gdx.physics.box2d.ContactImpulse;
@@ -7,7 +7,7 @@ import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.Manifold;
 import com.koenigkatze.asoulforasoul.entities.interaction.SensorTarget;
 
-public class LevelContactListener implements ContactListener
+public class EntityContactListener implements ContactListener
 {
 
 	@Override

@@ -1,19 +1,16 @@
 package com.koenigkatze.asoulforasoul.game.setup;
 
-import com.koenigkatze.asoulforasoul.entities.messages.EntityMessageEndpoint;
+import com.badlogic.gdx.Game;
+import com.badlogic.gdx.ai.msg.MessageManager;
 import com.koenigkatze.asoulforasoul.game.messages.GameMessageEndpoint;
 import com.koenigkatze.asoulforasoul.logging.Logging;
 import com.koenigkatze.asoulforasoul.media.music.MusicMessageEndpoint;
 import com.koenigkatze.asoulforasoul.media.sound.SoundMessageEndpoint;
-import com.koenigkatze.asoulforasoul.messages.codes.EntityMessageCodes;
 import com.koenigkatze.asoulforasoul.messages.codes.GameMessageCodes;
 import com.koenigkatze.asoulforasoul.messages.codes.MessageCode;
 import com.koenigkatze.asoulforasoul.messages.codes.MusicMessageCodes;
 import com.koenigkatze.asoulforasoul.messages.codes.SoundMessageCodes;
 import com.koenigkatze.asoulforasoul.messages.routing.MessageEndpoint;
-
-import com.badlogic.gdx.Game;
-import com.badlogic.gdx.ai.msg.MessageManager;
 
 public final class BasicMessagingSetup
 {
@@ -25,9 +22,6 @@ public final class BasicMessagingSetup
 
 		registerGameEndpoint(messageManager, game);
 		Logging.logDebug(BasicMessagingSetup.class, "Game message endpoint registered.");
-
-		registerEntityEndpoint(messageManager);
-		Logging.logDebug(BasicMessagingSetup.class, "Entity message endpoint registered.");
 
 		registerSoundEndpoint(messageManager);
 		Logging.logDebug(BasicMessagingSetup.class, "Sound message endpoint registered.");
@@ -51,18 +45,7 @@ public final class BasicMessagingSetup
 		}
 	}
 
-	private static void registerEntityEndpoint(final MessageManager messageManager)
-	{
-		final MessageEndpoint entityMessageEndpoint = new EntityMessageEndpoint();
-		for (final EntityMessageCodes entityCode : EntityMessageCodes.values())
-		{
-			messageManager.addListener(entityMessageEndpoint, entityCode.get());
-		}
-		for (final MessageCode entityCode : entityMessageEndpoint.getCodesToSuscribe())
-		{
-			messageManager.addListener(entityMessageEndpoint, entityCode.get());
-		}
-	}
+
 
 	private static void registerSoundEndpoint(final MessageManager messageManager)
 	{

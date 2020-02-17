@@ -1,4 +1,4 @@
-package com.koenigkatze.asoulforasoul.entities.messages;
+package com.koenigkatze.asoulforasoul.entities;
 
 import com.badlogic.gdx.ai.msg.Telegram;
 import com.badlogic.gdx.maps.tiled.objects.TiledMapTileMapObject;
@@ -13,24 +13,28 @@ import com.koenigkatze.asoulforasoul.messages.codes.EntityMessageCodes;
 import com.koenigkatze.asoulforasoul.messages.codes.LevelMessageCodes;
 import com.koenigkatze.asoulforasoul.messages.routing.MessageRouterAdapter;
 
-public final class EntityMessageRouter extends MessageRouterAdapter
-{
-	private MapEntityFactory entityFactory;
+public final class EntityMessageRouter extends MessageRouterAdapter {
+
+	private final MapEntityFactory entityFactory;
+	private final EntityManager manager;
+
+	public EntityMessageRouter(final MapEntityFactory entityFactory, final EntityManager manager) {
+		super();
+		this.entityFactory = entityFactory;
+		this.manager = manager;
+	}
 
 	@Override
-	public boolean handleEntityMessage(final Telegram message)
-	{
+	public boolean handleEntityMessage(final Telegram message) {
 		final EntityMessageCodes submittedMessageCode = EntityMessageCodes.getForCode(message.message);
 		final Object payload = message.extraInfo;
-		if (entityFactory == null)
-		{
+		if (entityFactory == null) {
 			Logging.logError(EntityMessageRouter.class,
 					"Entity factory not set up. Entity could not be created: " + payload);
 			return false;
 		}
 
-		switch (submittedMessageCode)
-		{
+		switch (submittedMessageCode) {
 		case CREATE_BLOCKED_OBJECT:
 			if (!(payload instanceof BlockedObjectProperties)) {
 				Logging.logError(EntityMessageRouter.class,
@@ -42,8 +46,7 @@ public final class EntityMessageRouter extends MessageRouterAdapter
 			Logging.logDebug(EntityMessageRouter.class, "Blocked object created: " + blockedObjectProperties);
 			return true;
 		case CREATE_PLAYER_ENTITY:
-			if (!(payload instanceof CharacterMapProperties))
-			{
+			if (!(payload instanceof CharacterMapProperties)) {
 				Logging.logError(EntityMessageRouter.class,
 						"Creating player entity failed. Payload not instance of CharacterMapProperties: " + payload);
 				return false;
@@ -54,8 +57,7 @@ public final class EntityMessageRouter extends MessageRouterAdapter
 			Logging.logDebug(EntityMessageRouter.class, "Player entity created: " + playerProperties);
 			return true;
 		case CREATE_NPC_ENTITY:
-			if (!(payload instanceof CharacterMapProperties))
-			{
+			if (!(payload instanceof CharacterMapProperties)) {
 				Logging.logError(EntityMessageRouter.class,
 						"Creating npc entity failed. Payload not instance of CharacterMapProperties: " + payload);
 				return false;
@@ -66,8 +68,7 @@ public final class EntityMessageRouter extends MessageRouterAdapter
 			Logging.logDebug(EntityMessageRouter.class, "Npc entity created: " + npcProperties);
 			return true;
 		case CREATE_PASSIVE_MAP_OBJECT:
-			if (!(payload instanceof TiledMapTileMapObject))
-			{
+			if (!(payload instanceof TiledMapTileMapObject)) {
 				Logging.logError(EntityMessageRouter.class,
 						"Creating passive map entity failed. Payload not instance of TiledMapTileMapObject: "
 								+ payload);
@@ -79,11 +80,9 @@ public final class EntityMessageRouter extends MessageRouterAdapter
 			Logging.logDebug(EntityMessageRouter.class, "Passive map entity created: " + passiveObject);
 			return true;
 		case CREATE_INFO_OBJECT:
-			if (!(payload instanceof InfoObjectProperties))
-			{
+			if (!(payload instanceof InfoObjectProperties)) {
 				Logging.logError(EntityMessageRouter.class,
-						"Creating active map object failed. Payload not instance of InfoObjectProperties: "
-								+ payload);
+						"Creating active map object failed. Payload not instance of InfoObjectProperties: " + payload);
 				return false;
 			}
 
@@ -94,7 +93,8 @@ public final class EntityMessageRouter extends MessageRouterAdapter
 		case BULK_CREATE_BLOCKED_OBJECT:
 			if (!(payload instanceof BlockedObjectBulkProperties)) {
 				Logging.logError(EntityMessageRouter.class,
-						"Bulk creating blocked objects failed. Payload not instance of BlockedObjectBulkProperties: " + payload);
+						"Bulk creating blocked objects failed. Payload not instance of BlockedObjectBulkProperties: "
+								+ payload);
 				return false;
 			}
 			final BlockedObjectBulkProperties bulkProperties = (BlockedObjectBulkProperties) payload;
@@ -106,7 +106,7 @@ public final class EntityMessageRouter extends MessageRouterAdapter
 		}
 		return false;
 	}
-
+	
 	@Override
 	public boolean handleLevelMessage(final Telegram message)
 	{
@@ -122,7 +122,7 @@ public final class EntityMessageRouter extends MessageRouterAdapter
 				return false;
 			}
 			final LevelData levelData = (LevelData) payload;
-			entityFactory = new MapEntityFactory(levelData.getEntityEngine(), levelData.getWorld());
+			this.manager.loadLevelSystems(levelData);
 			break;
 		default:
 			Logging.logError(EntityMessageRouter.class, "Unknown message code. Message ignored: " + message.message);
@@ -130,4 +130,5 @@ public final class EntityMessageRouter extends MessageRouterAdapter
 		}
 		return false;
 	}
+
 }

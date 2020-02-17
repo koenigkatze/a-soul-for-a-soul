@@ -36,12 +36,12 @@ import com.koenigkatze.asoulforasoul.ui.EntityIcons;
 import com.koenigkatze.asoulforasoul.ui.UiMessageData;
 
 public final class MapEntityFactory {
-	private final PooledEngine entityEngine;
 	private final BodyFactory bodyFactory;
+	private final PooledEngine entityEngine;
 
-	public MapEntityFactory(final PooledEngine entityEngine, final World world) {
-		this.entityEngine = entityEngine;
+	public MapEntityFactory(final World world, final PooledEngine entityEngine) {
 		this.bodyFactory = new BodyFactory(world);
+		this.entityEngine = entityEngine;
 	}
 
 	public void createBlockedObject(final BlockedObjectProperties blockedObjectProperties) {

@@ -5,18 +5,19 @@ import com.koenigkatze.asoulforasoul.maps.MapTerrainTypes;
 
 public final class CustomMapProperties
 {
-	private MapEnvironmentTypes environment;
+	private MapEnvironmentTypes environmentType;
 	private MapTerrainTypes terrainType;
 	private String theme;
+	private CameraTypes cameraType;
 
-	public MapEnvironmentTypes getEnvironment()
+	public MapEnvironmentTypes getEnvironmentType()
 	{
-		return environment;
+		return environmentType;
 	}
 
-	public void setEnvironment(final MapEnvironmentTypes environment)
+	public void setEnvironmentType(final MapEnvironmentTypes environment)
 	{
-		this.environment = environment;
+		this.environmentType = environment;
 	}
 
 	public MapTerrainTypes getTerrainType()
@@ -37,6 +38,14 @@ public final class CustomMapProperties
 	public void setTheme(final String theme)
 	{
 		this.theme = theme;
+	}
+
+	public CameraTypes getCameraType() {
+		return cameraType;
+	}
+
+	public void setCameraType(final CameraTypes cameraType) {
+		this.cameraType = cameraType;
 	}
 
 }
